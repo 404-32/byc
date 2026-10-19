@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Set up MoonBit
+        uses: hustcer/setup-moonbit@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Check formatting
+        run: moon fmt --check
+
+      - name: Static checks
+        run: moon check --target wasm --deny-warn
+
+      - name: Tests
+        run: moon test --target wasm --deny-warn
+
+      - name: CLI smoke test
+        run: >-
+          moon run cmd/main --
+          check .github/CODEOWNERS examples/changed-files.txt
