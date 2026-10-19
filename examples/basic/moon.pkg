@@ -1,0 +1,7 @@
+import {
+  "404-32/moon-codeowners" @codeowners,
+}
+
+pkgtype(kind: "executable")
+
+supported_targets = "+wasm"
