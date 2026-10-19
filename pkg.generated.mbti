@@ -1,0 +1,61 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "404-32/moon-codeowners"
+
+// Values
+pub fn normalize_path(String) -> String
+
+// Errors
+
+// Types and methods
+pub(all) struct AuditEntry {
+  path : String
+  owners : Array[Owner]
+  matched_pattern : String?
+  matched_line : Int?
+}
+
+pub(all) struct AuditReport {
+  entries : Array[AuditEntry]
+  uncovered : Array[String]
+  issues : Array[ParseIssue]
+  covered_count : Int
+  total_count : Int
+}
+
+pub(all) struct Codeowners {
+  rules : Array[Rule]
+  issues : Array[ParseIssue]
+}
+pub fn Codeowners::audit(Self, Array[String]) -> AuditReport
+pub fn Codeowners::find_rule(Self, String) -> Rule?
+pub fn Codeowners::is_valid(Self) -> Bool
+pub fn Codeowners::owners_for(Self, String) -> Array[Owner]
+pub fn Codeowners::parse(String) -> Self
+pub fn Codeowners::rule_count(Self) -> Int
+
+pub(all) struct Owner {
+  raw : String
+  kind : OwnerKind
+}
+
+pub(all) enum OwnerKind {
+  User
+  Team
+  Email
+}
+
+pub(all) struct ParseIssue {
+  line : Int
+  source : String
+  message : String
+}
+
+pub(all) struct Rule {
+  pattern : String
+  owners : Array[Owner]
+  line : Int
+}
+
+// Type aliases
+
+// Traits
