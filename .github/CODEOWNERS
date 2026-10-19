@@ -1,0 +1,5 @@
+# Project ownership for moon-codeowners.
+*             @404-32
+/src/         @404-32
+/cmd/         @404-32
+/.github/     @404-32
